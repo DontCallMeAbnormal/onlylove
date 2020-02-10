@@ -1,0 +1,15 @@
+.musicbtn {
+	position: absolute;
+	font-size: 2em;
+	color: aliceblue;
+	left:20px;
+
+}
+.app {
+	float: left;
+	transition: width 0.2s;
+	-webkit-transition: width 0.2s; /* Safari */
+}
+
+
+

@@ -1,0 +1,23 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\platforms",
+    "\\platforms\\android",
+    "\\platforms\\android\\app",
+    "\\platforms\\android\\app\\src",
+    "\\platforms\\android\\app\\src\\main",
+    "\\platforms\\android\\app\\src\\main\\assets",
+    "\\platforms\\android\\app\\src\\main\\assets\\www",
+    "\\platforms\\android\\app\\src\\main\\assets\\www\\static",
+    "\\platforms\\android\\app\\src\\main\\assets\\www\\static\\music",
+    "\\www",
+    "\\www\\css",
+    "\\www\\img",
+    "\\www\\js",
+    "\\www\\lib",
+    "\\www\\lib\\font",
+    "\\www\\lib\\font\\font_js"
+  ],
+  "SelectedNode": "\\www\\page2.html",
+  "PreviewInSolutionExplorer": false
+}
