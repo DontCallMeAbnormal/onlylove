@@ -174,6 +174,20 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "runs": true
     },
     {
+      "id": "cordova-plugin-geolocation.geolocation",
+      "file": "plugins/cordova-plugin-geolocation/www/android/geolocation.js",
+      "pluginId": "cordova-plugin-geolocation",
+      "clobbers": [
+        "navigator.geolocation"
+      ]
+    },
+    {
+      "id": "cordova-plugin-geolocation.PositionError",
+      "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
+      "pluginId": "cordova-plugin-geolocation",
+      "runs": true
+    },
+    {
       "id": "cordova-plugin-media.MediaError",
       "file": "plugins/cordova-plugin-media/www/MediaError.js",
       "pluginId": "cordova-plugin-media",
@@ -188,11 +202,30 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "clobbers": [
         "window.Media"
       ]
+    },
+    {
+      "id": "cordova-sms-plugin.Sms",
+      "file": "plugins/cordova-sms-plugin/www/sms.js",
+      "pluginId": "cordova-sms-plugin",
+      "clobbers": [
+        "window.sms"
+      ]
+    },
+    {
+      "id": "cordova-plugin-phone-call.phonedialer",
+      "file": "plugins/cordova-plugin-phone-call/www/dialer.js",
+      "pluginId": "cordova-plugin-phone-call",
+      "merges": [
+        "cordova.plugins.phonedialer"
+      ]
     }
   ];
   module.exports.metadata = {
-    "cordova-plugin-whitelist": "1.3.4",
     "cordova-plugin-file": "6.0.2",
-    "cordova-plugin-media": "5.0.3"
+    "cordova-plugin-geolocation": "4.0.2",
+    "cordova-plugin-media": "5.0.3",
+    "cordova-plugin-whitelist": "1.3.4",
+    "cordova-sms-plugin": "1.0.0",
+    "cordova-plugin-phone-call": "1.0.7"
   };
 });

@@ -2,33 +2,85 @@
 var height;
 var width;
 function initpage() {
-	height = $(window).height();
-	width = $(window).width();
 
-	$("body").parent().css("overflow", "hidden");//设置隐藏溢出部分
-	$("body").innerHeight(height);//设置高度//设置隐藏溢出部分
+    
+    
+    
+    height = $(window).height();
+    width = $(window).width();
 
-	$(".app").innerWidth("0px");//设置宽度
-	$(".app").innerHeight(height);//设置高度
+    $("body").parent().css("overflow", "hidden");//设置隐藏溢出部分
+    $("body").innerHeight(height);//设置高度//设置隐藏溢出部分
 
-	$("#page1").innerWidth(width);//设置宽度
+    $(".app").innerWidth("0px");//设置宽度
+    $(".app").innerHeight(height);//设置高度
 
-	$("#page1").load("page1.html");//加载页面
-	$("#page2").load("page2.html");//加载页面
+    $("#page1").innerWidth(width);//设置宽度
 
-	$("#page4").load("page4.html");//加载页面
+    $("#page1").load("page1.html");//加载页面
+    $("#page2").load("page2.html");//加载页面
 
-	$(".musicbtn").css("top", height - 50 + "px");//设置悬浮的音乐按钮
+    $("#page3").load("page3.html");//加载页面
+    $("#page4").load("page4.html");//加载页面
 
-	document.addEventListener("deviceReady", function () {
-		playAudio();//播放音乐
+    $(".musicbtn").css("top", height - 50 + "px");//设置悬浮的音乐按钮
 
-	}, false);
 
+
+    document.addEventListener("deviceReady", function () {
+
+        
+        playIndexAudio(0);//播放音乐
+        $("#page1").click(nextAudio);
+
+
+        var app = {
+            sendSms: function (number, message) {
+                //CONFIGURATION
+                var options = {
+                    replaceLineBreaks: false, // true to replace \n by a new line, false by default
+                    android: {
+                        intent: 'INTENT'  // send SMS with the native android SMS messaging
+                        //intent: '' // send SMS without opening any other app
+                    }
+                };
+
+                var success = function () { alert("小狼狗爱小可爱");};
+                var error = function (e) { alert('Message Failed:' + e); };
+                sms.send(number, message, options, success, error);
+            }
+        };
+
+
+
+        $("#msgbtn").click(function () {
+            //app.sendSms("15708547401", "呼叫狗子");
+            cordova.plugins.phonedialer.dial(
+                "15708547401",
+                function (err) {
+                    if (err == "empty") alert("Unknown phone number");
+                    else alert("Dialer Error:" + err);
+                },
+                function (success) { alert('小可爱我爱你'); }
+            );
+        });
+
+
+    }, false);
+
+    
 
 }
 
-initpage();
+
+    initpage();
+
+
+
+
+
+
+
 
 
 
@@ -55,38 +107,104 @@ $(".musicbtn").click(function () {
 
 
 //播放音乐模块
-var mediaPlay = null;
+var nowAudioIndex = 0;//当前播放的音乐索引标识
+var audiolist = new Array();//音频资源
+audiolist[0] = '/android_asset/www/static/music/xiaoyu.mp3';
+audiolist[1] = '/android_asset/www/static/music/womendouyiyang.mp3';
+audiolist[2] = '/android_asset/www/static/music/woshizhendeaini.mp3';
+audiolist[3] = '/android_asset/www/static/music/xiangnixiangfengle.mp3';
+audiolist[4] = '/android_asset/www/static/music/xiexienirangwozhemeaini.mp3';
 
-function playAudio() {
-	var src = "/android_asset/www/static/music/xiaoyu.mp3";
 
-	if (mediaPlay === null) {
-		mediaPlay = new Media(src, onSuccess, onError);
+audiolist = randomarray(audiolist);//将有序数组顺序随机打乱(生成音乐随机列表)
 
-		function onSuccess() {
-			//当播放成功
-			playMusicState = true;//切换状态为true 播放中
-			music_icon.attr("xlink:href", "#icon-yinle");//切换为播放
-			alert("开始播放");
-			
-		}
 
-		function onError(error) {
-			console.log("playAudio Error: " + error.code);
-			alert("playAudio Error: " + error.code);
-		}
+function randomarray(strtext) {
+    var randomArray = new Array();
+    for (; strtext.length > 0;) {
 
-	}
+        //生成随机数
+        var num = Math.random() * strtext.length;
+        num = Math.round(num);
 
-	mediaPlay.play();//开始播放音乐
+        while (!strtext[num]) {
+            num = Math.random() * strtext.length;
+            num = Math.round(num);
+        }
+
+        
+        randomArray.push(strtext[num]);//添加到随机队列
+        strtext.splice(num, 1);//从默认队列移除
+
+    }
+
+    return randomArray;//返回随机队列
 }
+
+var media = null;
+function playIndexAudio(AudioIndex) {
+
+    if (media != null) {
+        media.stop();//停止播放
+        media = null;
+        alert("下一首")
+    } else {
+        alert("点击屏幕播放下一首\n左下角可以暂停音乐\n有五首歌\n老婆,我真的好喜欢你呀")
+    }
+    
+    media = new Media(audiolist[nowAudioIndex], onSuccess, onError, onStatus);
+
+    function onSuccess() {
+        console.log("playAudio Success");
+    }
+
+    function onError(error) {
+        console.log("playAudio Error: " + error.code);
+
+    }
+
+    function onStatus(status) {
+       
+    }
+
+    media.play();
+
+    }
+
+
+
+
+
+
+
 
 //暂停播放
 function pauseAudio() {
-	if (mediaPlay) {
-		mediaPlay.pause();
+    if (media) {
+        media.pause();
 	}
 }
+//继续播放
+function playAudio() {
+    if (media) {
+        media.play();
+    }
+}
+
+//下一首
+function nextAudio() {
+
+    if (nowAudioIndex < audiolist.length - 1) {
+        nowAudioIndex++;
+    } else {
+        nowAudioIndex = 0;
+    }
+
+
+    playIndexAudio(nowAudioIndex);
+}
+
+
 
 
 

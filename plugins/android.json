@@ -7,10 +7,19 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-whitelist": {
+    "cordova-plugin-geolocation": {
       "PACKAGE_NAME": "com.lzq.love"
     },
     "cordova-plugin-media": {
+      "PACKAGE_NAME": "com.lzq.love"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.lzq.love"
+    },
+    "cordova-sms-plugin": {
+      "PACKAGE_NAME": "com.lzq.love"
+    },
+    "cordova-plugin-phone-call": {
       "PACKAGE_NAME": "com.lzq.love"
     }
   },
