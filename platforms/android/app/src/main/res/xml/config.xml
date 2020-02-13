@@ -21,6 +21,9 @@
     <feature name="PhoneDialer">
         <param name="android-package" value="org.apache.cordova.phonedialer.PhoneDialer" />
     </feature>
+    <feature name="Toast">
+        <param name="android-package" value="nl.xservices.plugins.Toast" />
+    </feature>
     <name>爱希</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.

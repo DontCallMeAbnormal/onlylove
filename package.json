@@ -19,6 +19,7 @@
     "cordova-plugin-geolocation": "^4.0.2",
     "cordova-plugin-media": "^5.0.3",
     "cordova-plugin-phone-call": "git+https://github.com/lakshmansha/cordova-plugin-phone-call.git",
+    "cordova-plugin-x-toast": "^2.7.2",
     "cordova-sms-plugin": "^1.0.0"
   },
   "devDependencies": {
@@ -30,7 +31,8 @@
       "cordova-plugin-media": {},
       "cordova-sms-plugin": {},
       "cordova-plugin-geolocation": {},
-      "cordova-plugin-phone-call": {}
+      "cordova-plugin-phone-call": {},
+      "cordova-plugin-x-toast": {}
     },
     "platforms": [
       "android"

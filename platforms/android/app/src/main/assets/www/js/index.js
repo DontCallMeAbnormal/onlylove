@@ -31,7 +31,18 @@ function initpage() {
 
         
         playIndexAudio(0);//播放音乐
-        $("#page1").click(nextAudio);
+        $("#page1").click(nextAudio);//单击page1会播放下一首歌
+
+
+
+        document.addEventListener("backbutton", exitApp, false);//单击返回键退出app 
+
+        function exitApp() {
+            
+            media.release();//释放音频资源
+            navigator.app.exitApp();
+
+         }
 
 
         var app = {
@@ -147,7 +158,7 @@ function playIndexAudio(AudioIndex) {
     if (media != null) {
         media.stop();//停止播放
         media = null;
-        alert("下一首")
+        //alert("下一首")
     } else {
         alert("点击屏幕播放下一首\n左下角可以暂停音乐\n有五首歌\n老婆,我真的好喜欢你呀")
     }
@@ -164,7 +175,24 @@ function playIndexAudio(AudioIndex) {
     }
 
     function onStatus(status) {
-       
+        media.getCurrentPosition(
+            // success callback
+            function (position) {
+                if (position > -1) {
+                    //alert((position) + " sec");
+                    if (position < 0 && status == Media.MEDIA_STOPPED && media.getDuration() != -1) {
+                        nextAudio();//下一首
+                        //alert("总时间" + media.getDuration());
+
+                    }
+
+                }
+            },
+            // error callback
+            function (e) {
+                console.log("Error getting pos=" + e);
+            });
+        
     }
 
     media.play();
@@ -203,6 +231,7 @@ function nextAudio() {
 
     playIndexAudio(nowAudioIndex);
 }
+
 
 
 

@@ -218,6 +218,14 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "merges": [
         "cordova.plugins.phonedialer"
       ]
+    },
+    {
+      "id": "cordova-plugin-x-toast.Toast",
+      "file": "plugins/cordova-plugin-x-toast/www/Toast.js",
+      "pluginId": "cordova-plugin-x-toast",
+      "clobbers": [
+        "window.plugins.toast"
+      ]
     }
   ];
   module.exports.metadata = {
@@ -226,6 +234,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-media": "5.0.3",
     "cordova-plugin-whitelist": "1.3.4",
     "cordova-sms-plugin": "1.0.0",
-    "cordova-plugin-phone-call": "1.0.7"
+    "cordova-plugin-phone-call": "1.0.7",
+    "cordova-plugin-x-toast": "2.7.2"
   };
 });
